@@ -76,7 +76,7 @@ function update() {
   nextMineDist -= scr;
   if (nextMineDist < 0) {
     mines.push({x: 103, vx: 0});
-    nextMineDist = rnd(200, 420) / sqrt(difficulty);
+    nextMineDist = rnd(200, 420) / difficulty;
   }
   color("red");
   remove(mines, (m) => {
