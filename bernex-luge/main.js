@@ -151,7 +151,7 @@ function update() {
   if (ship.state === "jump" && c.rect.black) {
     const d = ship.pos.x - jumpX;
     if (d > 0) {
-      addScore(ceil(sqrt(d * d)), ship.pos);
+      addScore(ceil(sqrt(d * d) + ship.vel.x), ship.pos);
     }
     color("black");
     particle(ship.pos.x,ship.pos.y,ship.vel.y*5,rnd(1,(ship.vel.y+ship.vel.x)/2));

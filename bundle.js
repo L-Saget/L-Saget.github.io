@@ -344,6 +344,7 @@ color: #888;
         const canvasCss = `
 position: absolute;
 margin: 10px;
+margin-top: 40px;
 left: 50%;
 top: 50%;
 transform: translate(-50%, -50%);
