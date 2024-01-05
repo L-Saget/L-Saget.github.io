@@ -1,7 +1,7 @@
 title = "Bernex luge";
 
 description = `
-[Tap any] Jump
+[Clic] Saut
 `;
 
 characters = [];
@@ -156,9 +156,9 @@ function update() {
     color("black");
     particle(ship.pos.x,ship.pos.y,ship.vel.y*5,rnd(1,(ship.vel.y+ship.vel.x)/2));
     color("light_black");
-    particle(ship.pos.x,ship.pos.y,ship.vel.y1,(ship.vel.y+ship.vel.x)/4);
+    particle(ship.pos.x,ship.pos.y,ship.vel.y1,(ship.vel.y+ship.vel.x)/2);
     color("light_red");
-    particle(ship.pos.x,ship.pos.y,ship.vel.y/2,(ship.vel.y+ship.vel.x)/4);
+    particle(ship.pos.x,ship.pos.y,ship.vel.y/2,(ship.vel.y+ship.vel.x)/2);
     ship.state = "ski";
     ship.vel.x *= 0.5;
   }
@@ -175,6 +175,10 @@ function update() {
     // Draw the snow as a square of size 1
     g = i%4 ? box(snow.pos, 1) : box(snow.pos, 2);
     if(i%4 && g.isColliding.rect.black) {
+      snow.pos.y = 150;
+    }
+    if(( g.isColliding.rect.yellow || g.isColliding.rect.red) && ship.state === "jump") {
+      console.log("colid snow")
       snow.pos.y = 150;
     }
   });
@@ -223,7 +227,7 @@ function initGame () {
     angle: 0,
     state: "ski",
   };
-  snows = times(40, () => {
+  snows = times(60, () => {
     // Random number generator function
     // rnd( min, max )
     const posX = rnd(0, 100);
@@ -237,3 +241,12 @@ function initGame () {
     };
   });
 }
+
+function  addSnow() {
+  times(50, () => snows.push({
+    pos: vec(rnd(0, 100), rnd(0, 150)),
+    speed:rnd(0.2, 0.8)
+  }))
+
+}
+
