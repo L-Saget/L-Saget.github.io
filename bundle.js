@@ -2074,7 +2074,7 @@ l l l
         options$1 = Object.assign(Object.assign({}, defaultOptions$1), _options);
         init$8(options$1.theme.isDarkColor);
         init$7(options$1.viewSize, options$1.bodyBackground, options$1.viewBackground, options$1.isCapturing, options$1.isCapturingGameCanvasOnly, options$1.captureCanvasScale, options$1.theme);
-        init$3(options$1.isSoundEnabled ? sss.startAudio : () => { });
+        init$3(() => { });
         init$6();
         _init$1();
         update$3();
@@ -2090,7 +2090,6 @@ l l l
             nextFrameTime = now + deltaTime;
         }
         if (options$1.isSoundEnabled) {
-            sss.update();
         }
         update$4();
         _update$1();
@@ -2823,11 +2822,9 @@ l l l
      */
     function play(type, options) {
         if (!isWaitingRewind && !isRewinding && isSoundEnabled) {
-            if (options != null && typeof sss.playSoundEffect === "function") {
-                sss.playSoundEffect(type, options);
+            if (options != null) {
             }
             else {
-                sss.play(soundEffectTypeToString[type]);
             }
         }
     }
@@ -2837,22 +2834,12 @@ l l l
      */
     /** @ignore */
     function playBgm() {
-        if (typeof sss.generateMml === "function") {
-            bgmTrack = sss.playMml(sss.generateMml());
-        }
-        else {
-            sss.playBgm();
-        }
     }
     /**
      * Stop a background music
      */
     /** @ignore */
     function stopBgm() {
-        if (bgmTrack != null) {
-            sss.stopMml(bgmTrack);
-        }
-        sss.stopBgm();
     }
     /**
      * Save and load game frame states. Used for realizing a rewind function.
@@ -3049,7 +3036,6 @@ l l l
             defineCharacters(characters, "a");
         }
         if (isSoundEnabled) {
-            sss.init(seed);
         }
         const sz = loopOptions.viewSize;
         terminalSize = { x: Math.floor(sz.x / 6), y: Math.floor(sz.y / 6) };
